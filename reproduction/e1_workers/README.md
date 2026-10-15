@@ -85,16 +85,17 @@ in the main guide. It is optional for inspecting CSVs and generated TeX.
 Under `OUTPUT/e1_workers/`:
 
 - `e1_families.csv`: family signatures, instance counts, maximum logical-job
-  execution, minimum observed interval and median run utilization.
+  execution, minimum observed interval and mean run utilization.
 - `e1_instances.csv`: per-instance execution/interval evidence.
 - `profiles/`: scheduling profile CSVs and metadata.
-- `e1-families.tex` / `.pdf`: the table in Representative/Stress panels.
+- `e1-families.tex` / `.pdf`: the compact table with Representative/Stress columns side by side.
+- `e1-families-full.tex` / `.pdf`: the supplementary table with finer precision.
 - With supplements: `startup/` reconstructed model and `ablation_threads.csv`.
 
 Compare rows by camera, workload and family. The archive reproduces the paper's
 frame-driven capture/application families and slower timer families, including
 the D455 thermal monitor; the paper reports the same startup topology in all
-20 launches. Timing values can differ in a fresh run. Utilization is median
+20 launches. Timing values can differ in a fresh run. Utilization is the arithmetic mean of
 per-run CPU residency, summed across equivalent instances, rather than the
 ratio of the execution maximum to interval minimum. Dispatcher observations
 mainly characterize idle timeouts, not arbitrary event-driven workload bounds.
