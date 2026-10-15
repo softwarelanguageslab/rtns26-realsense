@@ -121,7 +121,7 @@ def main():
     parser.add_argument('--extract-only', action='store_true')
     parser.add_argument('--input', type=Path, help='Existing extracted paper metadata package')
     parser.add_argument('--output', type=Path, default=HERE / 'generated')
-    parser.add_argument('--pdf', action='store_true', help='Also render the 11 paper objects; requires TeX Live')
+    parser.add_argument('--pdf', action='store_true', help='Also render the 12 paper objects; requires TeX Live')
     args = parser.parse_args()
     if sys.version_info < (3, 12):
         parser.error('Use Python 3.12 or newer; validated with Python 3.12')

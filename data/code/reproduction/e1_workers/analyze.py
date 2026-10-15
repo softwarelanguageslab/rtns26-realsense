@@ -69,5 +69,5 @@ def analyze(repo, roots, out, artifacts, helper, archive, sections):
                         'instances':t['role_instance_count'],
                         'execution_max_us':t['role_observed_execution_max_ns']/1000,
                         'interval_min_ms':t['role_observed_logical_period_min_ns']/1e6,
-                        'utilization_percent':statistics.median(usage[sig])})
+                        'utilization_percent':statistics.mean(usage[sig])})
         write(out/'e1_families.csv',table); write(out/'e1_instances.csv',instances)

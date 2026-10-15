@@ -76,8 +76,11 @@
 stream sequence gap for one D435 with four OTHER CPU competitors.
 Each return is counted once in its category.  (b) E3 percentage of
 non-fresh framesets---partially or fully stale, affected by a sequence gap, or both---under
-targeted CPU~3 starvation and progressive xHCI/UVC copy protection; each
+CPU interference on the core hosting the xHCI IRQ thread,
+with progressive scheduling protection for xHCI and UVC copy work; each
 treatment label gives the xHCI IRQ policy above the UVC-copy kworker policy.
-Each bar pools three 30-s non-RT \texttt{threadirqs} stress runs.}
+Each bar pools three 30-s non-RT \texttt{threadirqs} stress runs.
+% \ap{what is a CPU 3 starvation?}
+}
 \label{fig:linux-host-path-results}
 \end{figure*}

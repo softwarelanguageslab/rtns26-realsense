@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the 11 current paper objects from audited measurements and source layouts."""
+"""Build the 12 current paper objects from audited measurements and source layouts."""
 from __future__ import annotations
 import argparse
 from collections import Counter, defaultdict
@@ -35,42 +35,9 @@ def span(group, key, digits, intermediate=None):
     return low if low == high else low + '--' + high
 
 
-def family_table(template, derived, checks):
-    data = rows(derived / 'e1_workers/e1_families.csv')
-    labels = ['Depth/IR capture', 'Color capture', 'Application wait', 'udev watcher',
-              'Time-difference keeper', 'Thermal monitor', 'Firmware-error poller',
-              'Notification/pipeline dispatchers']
-    util_digits = [2, 2, 3, 4, 4, 4, 4, 5]
-    index = 0
-    pattern = r'(?m)^    (?:Depth/IR capture|Color capture|Application wait|udev watcher|Time-difference keeper|\\mbox\{Thermal monitor|Firmware-error poller|Notification/pipeline dispatchers).*?\\\\'
-    def replace(match):
-        nonlocal index
-        family = labels[index % 8]
-        workload = ('representative30', 'stress60')[index // 8]
-        group = [r for r in data if r['workload'] == workload and
-                 (r['family'] == family or (index % 8 == 7 and r['family'] in
-                  ('Notification dispatcher', 'Pipeline dispatcher')))]
-        if not group:
-            raise ValueError(f'Missing E1 family: {family}')
-        cells = [s.strip() for s in match.group()[:-2].split('&')]
-        interval = span(group, 'interval_min_ms', 2, 3)
-        if index % 8 == 7:
-            if not all(4999 < float(r['interval_min_ms']) < 5001 for r in group):
-                raise ValueError('Dispatcher idle-timeout assumption no longer holds')
-            interval = r'$\approx$5000 (idle timeout)'
-        new = ['5' if index % 8 == 7 else span(group, 'instances', 0),
-               span(group, 'execution_max_us', 0, 3), interval,
-               span(group, 'utilization_percent', util_digits[index % 8],
-                    5 if index % 8 == 7 else 4)]
-        old = [re.sub(r'\s+', ' ', x) for x in cells[2:]]
-        checks.append({'object': 'main-table-2', 'row': f'{workload}/{family}',
-                       'matches_paper': old == new, 'paper': old, 'rebuilt': new})
-        index += 1
-        return '    ' + ' & '.join(cells[:2] + new) + r' \\'
-    result = re.sub(pattern, replace, template, flags=re.S)
-    if index != 16:
-        raise ValueError(f'Expected 16 E1 rows, found {index}')
-    return result
+def family_table(template, derived, checks, full=False):
+    from reproduction.e1_workers.tables import format_table
+    return format_table(template, rows(derived / 'e1_workers/e1_families.csv'), checks, full)
 
 
 def overhead_table(template, derived, age, checks):
@@ -235,6 +202,7 @@ def main():
     for source in sorted((PACKAGE / 'paper/objects').glob('*.tex')):
         text = source.read_text()
         if source.stem == 'tab-steady-model-validation': text = family_table(text, args.derived, checks)
+        elif source.stem == 'tab-steady-model-validation-full': text = family_table(text, args.derived, checks, full=True)
         elif source.stem == 'tab-instrumentation-overhead': text = overhead_table(text, args.derived, False, checks)
         elif source.stem == 'tab-instrumentation-age-overhead': text = overhead_table(text, args.derived, True, checks)
         elif source.stem == 'fig-linux-host-path-results': text = host_path_figure(text, args.derived, checks)
@@ -257,9 +225,9 @@ def main():
     report = {'checks': checks, 'all_match': all(c['matches_paper'] for c in checks),
               'object_count':len(list(out.glob('*.tex'))),
               'manual_objects':['fig-linux-usb-path','fig-thread-temporal-model','fig-timing-notions','tab-experiment-populations'],
-              'e1_rounding':'Preserve published intermediate CSV precision: C/T to 3 decimals; utilization to 4 (5 for dispatchers). Full precision remains in derived CSVs.'}
+              'e1_rounding':'Unrounded estimates are retained in CSVs and E1 validation ranges. LaTeX uses ordinary formatting without intermediate rounding. E1 paper comparisons allow one unit of the last displayed digit; counts and <0.001 bounds are exact.'}
     (out / 'validation.json').write_text(json.dumps(report,indent=2)+'\n')
-    if report['object_count'] != 11 or not report['all_match']:
+    if report['object_count'] != 12 or not report['all_match']:
         raise ValueError(f'Paper comparison failed; inspect {out / "validation.json"}')
     if args.pdf:
         render(out)

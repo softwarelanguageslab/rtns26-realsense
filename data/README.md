@@ -43,7 +43,7 @@ Outputs are written to `data/generated/`:
 
 - `derived/`: experiment CSVs, worker profiles, and a manifest recording the
   input paths and hashes consumed by the analysis.
-- `paper/`: all **11 current paper figure/table objects** in LaTeX, the native E4
+- `paper/`: all **12 current paper figure/table objects** in LaTeX, the native E4
   TikZ figures, `freshness-patterns.json`, and the comparison report
   `validation.json`.
 
@@ -80,19 +80,20 @@ python3 data/reproduce.py --pdf --output data/generated-pdf
 
 The command checks the archive parts, extracts `data/metadata/` into
 `data/metadata-unpacked/` or reuses a verified extraction, runs the analyses,
-and rebuilds the paper objects. It performs **46 comparisons** against the
-captured manuscript and compiles **11 standalone figure/table PDFs**.
+and rebuilds the paper objects. It performs **54 comparisons** against the
+captured manuscript and compiles **12 standalone figure/table PDFs**.
 Python generates the analysis data and LaTeX/TikZ sources; `pdflatex` renders
 the PDFs. No hardware capture or pip installation is needed.
 
 | Output | Location |
 | --- | --- |
 | Analysis CSVs, worker profiles, and input provenance | `data/generated-pdf/derived/` |
-| Figure/table LaTeX sources and 11 individual PDFs | `data/generated-pdf/paper/` |
+| Figure/table LaTeX sources and 12 individual PDFs | `data/generated-pdf/paper/` |
 | Numeric and TikZ comparison report | `data/generated-pdf/paper/validation.json` |
 | Per-object PDF compilation logs | `data/generated-pdf/paper/*.render.log` |
 
 The main result PDFs are `tab-steady-model-validation.pdf` (E1),
+`tab-steady-model-validation-full.pdf` (E1 supplementary Section E),
 `fig-linux-host-path-results.pdf` (E2/E3), `fig-main-matrix.pdf` (E4 p99), and
 `fig-main-matrix-max.pdf` (E4 maximum), all under the `paper/` output directory.
 The command produces separate PDFs; it does not create a merged review PDF.
@@ -151,6 +152,7 @@ appear in `generated/paper/`.
 | Supplementary Table 1: instrumentation overhead | `tab-instrumentation-overhead` | 18 accepted resource summaries and frame-event files |
 | Supplementary Table 2: data age | `tab-instrumentation-age-overhead` | Oldest frame component at each delivery, followed by median per-run statistics |
 | Supplementary Table 3: UVC patterns | `tab-uvc-freshness-patterns` | Frame-number reuse, catch-up gaps, and all-stream skips reconstructed from six accepted URB5 runs |
+| Supplementary Table 4 (Section E): full E1 instantiation | `tab-steady-model-validation-full` | The same 12 E1 runs, with finer displayed precision |
 | Supplementary Figure 1: E4 maximum latency | `fig-main-matrix-max` | The same 192 E4 runs and their observed per-run maxima |
 
 The retained campaign groups are startup, stream ablation, E1 calibration, E2
@@ -173,22 +175,41 @@ freshness counts remain unchanged. No E4 sample was rejected by that range check
 The full software on `main` has the corrected decoder; this package retains the
 paper's archived summary inputs rather than silently replacing them.
 
-Main Table 2 retains the paper's intermediate CSV rounding before final range
-formatting: execution/interval values to three decimals and utilization to four
-(five for dispatchers). Full precision remains in `derived/e1_workers/`.
-Some last displayed digits differ from rounding full-precision values directly.
-The comparison report checks all 16 worker rows, both instrumentation tables,
+E1 CSVs and the validation report retain the unrounded estimates. Generated
+LaTeX tables use ordinary display formatting, without reproducing the paper's
+intermediate rounding. E1 comparisons allow one unit of the last displayed
+paper digit; instance counts must match exactly, and `$<0.001$` bounds are
+checked against unrounded values. The last displayed digit can therefore differ
+between the manuscript and generated tables without changing the estimates.
+The comparison report checks all eight R/S rows of Main Table 2 (including
+instance counts) and all 16 rows of supplementary Section E, both instrumentation tables,
 UVC patterns, E2/E3 plot values, and byte identity of both E4 TikZ figures.
+
+The object snapshots match manuscript commit `7e00632aa3da608fcf529b045d6e8c8c2fd87a05`.
+Full precision here refers to the supplementary display precision; unrounded
+estimates remain available in the CSVs.
+
+To check these snapshots against a newer manuscript checkout, run:
+
+```sh
+python3 data/check_manuscript.py --manuscript /path/to/rtns26_rtrealsense
+python3 -B -m unittest discover -s data/tests -v
+```
+
+The first command compares all 12 active source blocks and both E4 TikZ files
+with the supplied manuscript, so a successful archived numeric comparison alone
+cannot conceal a stale snapshot. It does not modify either copy.
 
 ## Code and provenance
 
 - `code/reproduction/` and `code/tools/` are a small snapshot of the existing
   analysis modules and their local imports. The archive directory lookup in
   `code/reproduction/analyze.py` is adapted to the paper-oriented directory names;
-  the analysis calculations are unchanged.
+  E1 utilization is the arithmetic mean of the three per-run average
+  utilizations, matching the revised manuscript; other calculations are unchanged.
 - `code/paper_outputs.py` assembles the paper's combined E2/E3 panel and formats
   its measurement tables using the reconstructed values.
-- `paper/objects/` contains only the 11 active figure/table source blocks.
+- `paper/objects/` contains only the 12 active figure/table source blocks.
   The conceptual diagrams and experimental-design table are identified above.
 - `paper/figures/` contains the two original E4 TikZ figures for comparison.
 - `SOURCE_MANIFEST.json` records source commits and hashes for copied code and

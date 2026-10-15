@@ -8,6 +8,8 @@ and 60 FPS.  Bars are means of three per-run p99 values, dots are individual
 runs, dashed lines mark nominal frame periods, and red labels give the number
 of non-fresh frameset count (NF): deliveries with at least one reused component
 or sequence gap.  Each non-fresh frameset is counted once, and a bar without a
-label contains only fresh framesets.}
+label contains only fresh framesets.  Latencies at 60 FPS exceed those at
+30 FPS because the doubled frame rate doubles the USB payload and the
+capture work competing for the same cores.}
 \label{fig:main-matrix}
 \end{figure*}

@@ -84,17 +84,16 @@
     \node[lbl] at (7.3,-0.78)
       {$L^{\mathrm{host}}_{c,k}$ (host receive-to-frameset latency)};
 
-    % legend
-    \draw[lxhci] (0.3,-1.3) -- (0.75,-1.3);
-    \node[lbl, anchor=west] at (0.85,-1.3) {xHCI};
-    \draw[lasm] (2.5,-1.3) -- (2.95,-1.3);
-    \node[lbl, anchor=west] at (3.05,-1.3) {UVC/V4L2};
-    \draw[lsdk] (4.6,-1.3) -- (5.05,-1.3);
-    \node[lbl, anchor=west] at (5.15,-1.3) {SDK};
-    \draw[lpost] (6.6,-1.3) -- (7.05,-1.3);
-    \node[lbl, anchor=west] at (7.15,-1.3) {aggregation};
-    \draw[lq] (8.9,-1.3) -- (9.35,-1.3);
-    \node[lbl, anchor=west] at (9.45,-1.3) {output queue};
+    % legend: one node per entry (colour sample + label), chained with a
+    % fixed gap so the spacing is even regardless of label width.  The chain
+    % must stay inside the picture's bounding box (x <= 11.82), otherwise
+    % \resizebox shrinks the whole figure.
+    \newcommand{\lgs}[1]{\tikz[baseline=-0.6ex]\draw[#1] (0,0) -- (0.45,0);}
+    \node[lbl, anchor=west, inner sep=0pt] (lg1) at (0.3,-1.3) {\lgs{lxhci}~xHCI};
+    \node[lbl, anchor=west, inner sep=0pt, right=5mm of lg1.east] (lg2) {\lgs{lasm}~UVC/V4L2};
+    \node[lbl, anchor=west, inner sep=0pt, right=5mm of lg2.east] (lg3) {\lgs{lsdk}~SDK};
+    \node[lbl, anchor=west, inner sep=0pt, right=5mm of lg3.east] (lg4) {\lgs{lpost}~aggregation};
+    \node[lbl, anchor=west, inner sep=0pt, right=5mm of lg4.east] (lg5) {\lgs{lq}~output queue};
   \end{tikzpicture}%
   }
   \caption{Timing notions for one frameset with Depth and Color.  Each input
