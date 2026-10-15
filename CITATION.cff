@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "rtns26-realsense: code, benchmarks, and data for From Threads to Fresh Frames"
+authors:
+  - family-names: Shen
+    given-names: Yuwen
+    orcid: "https://orcid.org/0009-0008-0297-8252"
+  - family-names: Scholz
+    given-names: Constantin
+    orcid: "https://orcid.org/0000-0003-1510-8236"
+  - family-names: Vanderborght
+    given-names: Bram
+    orcid: "https://orcid.org/0000-0003-4881-9341"
+  - family-names: Joosen
+    given-names: Wouter
+    orcid: "https://orcid.org/0000-0002-7710-5092"
+  - family-names: Paolillo
+    given-names: Antonio
+    orcid: "https://orcid.org/0000-0001-6608-6562"
+license: MIT
+repository-code: "https://github.com/softwarelanguageslab/rtns26-realsense"
+preferred-citation:
+  type: conference-paper
+  title: "From Threads to Fresh Frames: Cross-Layer Modeling and Scheduling of RealSense on Linux"
+  authors:
+    - family-names: Shen
+      given-names: Yuwen
+    - family-names: Scholz
+      given-names: Constantin
+    - family-names: Vanderborght
+      given-names: Bram
+    - family-names: Joosen
+      given-names: Wouter
+    - family-names: Paolillo
+      given-names: Antonio
+  collection-title: "Proceedings of the 34th International Conference on Real-Time Networks and Systems (RTNS 2026)"
+  collection-type: proceedings
+  publisher:
+    name: Springer
+  year: 2026

@@ -1,9 +1,32 @@
-# rs-camera
+# rtns26-realsense
 
 C++ workloads and Python benchmark tooling for characterizing librealsense timing
 on Intel RealSense cameras.
 
-For paper artifact evaluation, start with the [reproduction guide](reproduction/README.md),
+This repository contains the code, benchmarks, and data of the following paper;
+please cite it if you use them:
+
+> Yuwen Shen, Constantin Scholz, Bram Vanderborght, Wouter Joosen, and
+> Antonio Paolillo. **From Threads to Fresh Frames: Cross-Layer Modeling and
+> Scheduling of RealSense on Linux.** In *Proceedings of the 34th
+> International Conference on Real-Time Networks and Systems (RTNS 2026)*,
+> Lecture Notes in Computer Science, Springer, 2026.
+
+```bibtex
+@inproceedings{shen2026threads,
+  title     = {From Threads to Fresh Frames: Cross-Layer Modeling and
+               Scheduling of {RealSense} on {Linux}},
+  author    = {Shen, Yuwen and Scholz, Constantin and Vanderborght, Bram and
+               Joosen, Wouter and Paolillo, Antonio},
+  booktitle = {Proceedings of the 34th International Conference on Real-Time
+               Networks and Systems (RTNS 2026)},
+  series    = {Lecture Notes in Computer Science},
+  publisher = {Springer},
+  year      = {2026},
+}
+```
+
+To reproduce the paper's results, start with the [reproduction guide](reproduction/README.md),
 then follow [Raspberry Pi setup](reproduction/setup/README.md) and the linked E1–E4 experiments.
 
 Dependency versions and verification commands are documented in
