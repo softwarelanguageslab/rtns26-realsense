@@ -150,7 +150,7 @@ appear in `generated/paper/`.
 | Main Table 1: experiment populations | `tab-experiment-populations` | Manuscript experimental-design table; analyzers check the corresponding run counts |
 | Main Table 2: E1 worker families | `tab-steady-model-validation` | 12 accepted runs: recorded lifecycles, activation intervals, execution samples, and worker summaries |
 | Supplementary Table 1: instrumentation overhead | `tab-instrumentation-overhead` | 18 accepted resource summaries and frame-event files |
-| Supplementary Table 2: data age | `tab-instrumentation-age-overhead` | Oldest frame component at each delivery, followed by median per-run statistics |
+| Supplementary Table 2: data age | `tab-instrumentation-age-overhead` | Oldest frame component at each delivery, followed by means of the per-run statistics |
 | Supplementary Table 3: UVC patterns | `tab-uvc-freshness-patterns` | Frame-number reuse, catch-up gaps, and all-stream skips reconstructed from six accepted URB5 runs |
 | Supplementary Table 4 (Section E): full E1 instantiation | `tab-steady-model-validation-full` | The same 12 E1 runs, with finer displayed precision |
 | Supplementary Figure 1: E4 maximum latency | `fig-main-matrix-max` | The same 192 E4 runs and their observed per-run maxima |
@@ -175,6 +175,11 @@ freshness counts remain unchanged. No E4 sample was rejected by that range check
 The full software on `main` has the corrected decoder; this package retains the
 paper's archived summary inputs rather than silently replacing them.
 
+Appendix B reports arithmetic means across its three accepted runs per cell:
+Mean averages the per-run means, p99 averages the per-run p99 values, and Max
+averages the per-run maxima. The same aggregation applies to CPU utilization,
+peak RSS, trace size, and data-age statistics.
+
 E1 CSVs and the validation report retain the unrounded estimates. Generated
 LaTeX tables use ordinary display formatting, without reproducing the paper's
 intermediate rounding. E1 comparisons allow one unit of the last displayed
@@ -185,7 +190,7 @@ The comparison report checks all eight R/S rows of Main Table 2 (including
 instance counts) and all 16 rows of supplementary Section E, both instrumentation tables,
 UVC patterns, E2/E3 plot values, and byte identity of both E4 TikZ figures.
 
-The object snapshots match manuscript commit `7e00632aa3da608fcf529b045d6e8c8c2fd87a05`.
+The object snapshots match manuscript commit `e79fb7760aa0151e2277a3b6e2fe6ec07bc7e016`.
 Full precision here refers to the supplementary display precision; unrounded
 estimates remain available in the CSVs.
 
@@ -206,7 +211,8 @@ cannot conceal a stale snapshot. It does not modify either copy.
   analysis modules and their local imports. The archive directory lookup in
   `code/reproduction/analyze.py` is adapted to the paper-oriented directory names;
   E1 utilization is the arithmetic mean of the three per-run average
-  utilizations, matching the revised manuscript; other calculations are unchanged.
+  utilizations. Appendix B likewise averages every per-run overhead statistic,
+  including means, p99 values, and maxima, across three runs.
 - `code/paper_outputs.py` assembles the paper's combined E2/E3 panel and formats
   its measurement tables using the reconstructed values.
 - `paper/objects/` contains only the 12 active figure/table source blocks.

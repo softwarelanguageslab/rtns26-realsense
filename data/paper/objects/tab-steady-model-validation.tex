@@ -1,33 +1,25 @@
 \begin{table}[!htb]
   \centering
-  \caption{E1 instantiation of the task tuple (Eq.~\ref{eq:steady-task-tuple})
-  and utilization accounting (Eq.~\ref{eq:cpu-resource-accounting}) from
-  three 30-s full-path traces per cell, for the Representative (R) and
-  Stress (S) workloads.  $\widehat C$ is the largest observed
-  logical-activation execution time; $\widehat T/\widehat\Delta$ is the
-  smallest stable period or observed non-periodic activation interval;
-  $U^{\mathrm{obs}}$ is the mean across three runs of the average utilization
-  of all equivalent instances (\% of one core), computed from mean execution times, mean
-  intervals, and instance counts, not from these extrema.  Each family has
-  one instance per camera unless noted ($n$=R/S).  Ranges span D435 and
-  D455, except the dispatcher row, which spans five individually identified
-  dispatchers.  The supplementary document (Section~E) lists both workloads
-  with full precision.}
+  \caption{E1 instantiation of Eqs.~\ref{eq:steady-task-tuple}
+  and~\ref{eq:cpu-resource-accounting} for the Representative (R) and Stress
+  (S) workloads.  $\widehat C$: largest logical-activation execution time;
+  $\widehat T/\widehat\Delta$: smallest stable period or activation interval;
+  $U^{\mathrm{obs}}$: mean per-run utilization of all equivalent instances (\%
+  of one core), from mean cost and interval, hence not the ratio of these
+  extrema (implied mean cost: one third to two thirds of $\widehat C$ for
+  frame-triggered families).  Instances per camera $n$ (R/S): Depth/IR capture
+  1/2, dispatchers 5/5, others 1.  Ranges span D435 and D455 (dispatchers: all
+  five); $^{*}$D455 only.  Full precision: supplementary Section~E.}
   \label{tab:steady-model-validation}
   \begingroup
   \footnotesize
-  \setlength{\tabcolsep}{2pt}
+  \setlength{\tabcolsep}{1.5pt}
   \renewcommand{\arraystretch}{1.08}
   \newcommand{\rsr}[1]{\multicolumn{1}{r}{#1}}
   \newcommand{\rg}[1]{\mbox{#1}}
-  \resizebox{0.9\textwidth}{!}{%
-  \begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.95cm}
-                    >{\raggedleft\arraybackslash}p{1.47cm}
-                    >{\raggedleft\arraybackslash}p{1.47cm}
-                    >{\raggedleft\arraybackslash}p{1.37cm}
-                    >{\raggedleft\arraybackslash}p{1.37cm}
-                    >{\raggedleft\arraybackslash}p{1.66cm}
-                    >{\raggedleft\arraybackslash}p{1.66cm}@{}}
+  % Full text width at \footnotesize, no scaling (reviewer A asked for a
+  % larger font); \extracolsep spreads the spare width between columns.
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{2.6cm}rrrrrr@{}}
     \toprule
     Worker family
       & \multicolumn{2}{c}{$\widehat C$ ($\mu$s)}
@@ -37,7 +29,7 @@
       & \rsr{R} & \rsr{S} & \rsr{R} & \rsr{S} & \rsr{R} & \rsr{S} \\
     \midrule
     \multicolumn{7}{@{}l}{\emph{Frame-triggered}} \\
-    Depth/IR capture ($n$=1/2) & \rg{827--845} & \rg{1894--1953} &
+    Depth/IR capture & \rg{827--845} & \rg{1894--1953} &
       \rg{32.8--33.2} & \rg{14.4--15.4} & \rg{1.11--1.12} & \rg{10.87--11.13} \\
     Color capture & \rg{1708--1730} & \rg{2166--2702} &
       \rg{32.9--33.2} & \rg{16.2--16.3} & \rg{3.61--3.66} & \rg{9.15--11.48} \\
@@ -46,17 +38,16 @@
     \multicolumn{7}{@{}l}{\emph{Timer-triggered}} \\
     udev watcher & \rg{75--95} & \rg{140--162} &
       100 & 100 & \rg{0.028--0.029} & \rg{0.040--0.041} \\
-    Time-difference keeper & \rg{368--410} & \rg{377--399} &
+    Time-diff.\ keeper & \rg{368--410} & \rg{377--399} &
       1001 & 1001 & \rg{0.016--0.021} & \rg{0.021--0.023} \\
-    Thermal monitor (D455) & 173 & 245 &
+    Thermal monitor$^{*}$ & 173 & 245 &
       2001 & 2001 & 0.0052 & 0.0061 \\
     Firmware-error poller & \rg{45--56} & \rg{63--107} &
       5000 & 5000 & $<$0.001 & $<$0.001 \\
-    \multicolumn{7}{@{}l}{\emph{Event-triggered (idle timeout)}} \\
-    Dispatchers ($n$=5/5) & \rg{46--69} & \rg{55--118} &
+    \multicolumn{7}{@{}l}{\emph{Event-triggered (5-s idle timeout)}} \\
+    Dispatchers & \rg{46--69} & \rg{55--118} &
       $\approx$5000 & $\approx$5000 & $<$0.001 & $<$0.001 \\
     \bottomrule
-  \end{tabular}%
-  }
+  \end{tabular*}
   \par\endgroup
 \end{table}

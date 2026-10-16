@@ -1,6 +1,6 @@
 {
-  "rs_camera_commit": "7d68f5ed1837ca60d477652ac86cca6bdd3adde0",
-  "manuscript_commit": "7e00632aa3da608fcf529b045d6e8c8c2fd87a05",
+  "rs_camera_commit": "aa7412259b93b5ef7c2f0d6f5f1817bba1c8e281",
+  "manuscript_commit": "e79fb7760aa0151e2277a3b6e2fe6ec07bc7e016",
   "files": [
     {
       "path": "code/reproduction/analyze.py",
@@ -87,7 +87,7 @@
     {
       "path": "code/reproduction/e4_scheduling/analyze.py",
       "origin": "rs-camera/reproduction/e4_scheduling/analyze.py",
-      "sha256": "21b53800d1a7c897f9cc5b25a78186be3a383f596355e9f6a277b8ddc42adcd1"
+      "sha256": "6ec52b36f13a77cf972e9e97e7e4cb7706e447d6e6965773f24ac2be46fd6810"
     },
     {
       "path": "code/reproduction/e4_scheduling/plot.py",
@@ -119,70 +119,70 @@
       "origin": "rtns26_rtrealsense/body/11-background.tex",
       "label": "fig:linux-usb-path",
       "sha256": "d08f35302bbf8c397c1f72699683ee06d5ca6a39bd6f525f04ab06b138e8233f",
-      "source_sha256": "6070fad045c817bab54a558a24352628f2354ec50ba29be63dc453a17b8d5f16"
+      "source_sha256": "dce8a6a55c758f7e1c68ef23e5aef376df2240044a8d92cd6b1ccfbd350dc3a4"
     },
     {
       "path": "paper/objects/fig-thread-temporal-model.tex",
       "origin": "rtns26_rtrealsense/body/20-models.tex",
       "label": "fig:thread-temporal-model",
       "sha256": "a0167fc65c4c56aec779d80ccbce46c9ac3403f3e728e3ef75fce2a123be79bf",
-      "source_sha256": "dcc2b72e63bfcdaf5b2906f68d4b842852f213ddf0f8a6a5005074edcb527d69"
+      "source_sha256": "6e30ed1e0091b8b8827b7e092923972df294c63dd563d76f5c7338583c716c5e"
     },
     {
       "path": "paper/objects/fig-timing-notions.tex",
       "origin": "rtns26_rtrealsense/body/20-models.tex",
       "label": "fig:timing-notions",
       "sha256": "88052f9e712badf3f5f7f9300e07b83f89e200b5211aaf328cc835332c3b7dba",
-      "source_sha256": "dcc2b72e63bfcdaf5b2906f68d4b842852f213ddf0f8a6a5005074edcb527d69"
+      "source_sha256": "6e30ed1e0091b8b8827b7e092923972df294c63dd563d76f5c7338583c716c5e"
     },
     {
       "path": "paper/objects/tab-steady-model-validation.tex",
       "origin": "rtns26_rtrealsense/body/22-evaluation.tex",
       "label": "tab:steady-model-validation",
-      "sha256": "c181da303302b6bc3d2855be8bb240b2e3f87acd7b4d8405e4b56234a9dd74d9",
-      "source_sha256": "545c505484e8b80172c049b9e8fc6a36c160a925ce815e5a65bd59b1871672f6"
+      "sha256": "863036f5dc0cec4f336b02079e634c7e891272a756e6a1a5db218f574d8dd2a5",
+      "source_sha256": "6bc773f6d23d0ea8e76adf9ae2d17aec6faefdb91847b5c05964eba2f5232dfd"
     },
     {
       "path": "paper/objects/fig-linux-host-path-results.tex",
       "origin": "rtns26_rtrealsense/body/22-evaluation.tex",
       "label": "fig:linux-host-path-results",
-      "sha256": "999ea39fc5a6fed4758eb9f643d64b3e59e8e2d67730930b086c431e18bd5a6d",
-      "source_sha256": "545c505484e8b80172c049b9e8fc6a36c160a925ce815e5a65bd59b1871672f6"
+      "sha256": "304ff83e2112d71613c6237ebe8b983e22cbc13544324c0927c05c72d2ca3434",
+      "source_sha256": "6bc773f6d23d0ea8e76adf9ae2d17aec6faefdb91847b5c05964eba2f5232dfd"
     },
     {
       "path": "paper/objects/fig-main-matrix.tex",
       "origin": "rtns26_rtrealsense/body/22-evaluation.tex",
       "label": "fig:main-matrix",
-      "sha256": "a69b718e7360f5655b6de11902af75f6de3d80499e4319daa5ed24bb0488adf7",
-      "source_sha256": "545c505484e8b80172c049b9e8fc6a36c160a925ce815e5a65bd59b1871672f6"
+      "sha256": "f8f33f048c1531bdb8a21c33dbdd016e7b8e98227b0446d613aaa3b4a8aa1cfb",
+      "source_sha256": "6bc773f6d23d0ea8e76adf9ae2d17aec6faefdb91847b5c05964eba2f5232dfd"
     },
     {
       "path": "paper/objects/tab-instrumentation-overhead.tex",
       "origin": "rtns26_rtrealsense/body/40-appendix.tex",
       "label": "tab:instrumentation-overhead",
-      "sha256": "24284dbd93ee0161078aaf6ed34132097b9391469ded39456a163460c078b940",
-      "source_sha256": "5b45751fd01fd3b479fbef13f572fafd3e20be621cd0eaa3e1cb98d788d4cbed"
+      "sha256": "860f63caa69d7feacb01cbab71e576824161b0d3750aae3af1518ffededbebb2",
+      "source_sha256": "2c10f845d57901aa2e8c620172eb5eff12bc97f5ee19d93db5462dd6fb4e2e90"
     },
     {
       "path": "paper/objects/tab-instrumentation-age-overhead.tex",
       "origin": "rtns26_rtrealsense/body/40-appendix.tex",
       "label": "tab:instrumentation-age-overhead",
-      "sha256": "26e4aab6bbe2ca275d39a0c7258064a6c617b2e63ffd9a5daa6937ad95758414",
-      "source_sha256": "5b45751fd01fd3b479fbef13f572fafd3e20be621cd0eaa3e1cb98d788d4cbed"
+      "sha256": "798545f2190d41f8ad321350524adee2cee9db1ceb55b7ef14bb2fc99c042d83",
+      "source_sha256": "2c10f845d57901aa2e8c620172eb5eff12bc97f5ee19d93db5462dd6fb4e2e90"
     },
     {
       "path": "paper/objects/tab-uvc-freshness-patterns.tex",
       "origin": "rtns26_rtrealsense/body/40-appendix.tex",
       "label": "tab:uvc-freshness-patterns",
       "sha256": "0d851a2e7320c31001c8fe662868cbf5080d98c3ffd7e4d9044b64eb782f5c4e",
-      "source_sha256": "5b45751fd01fd3b479fbef13f572fafd3e20be621cd0eaa3e1cb98d788d4cbed"
+      "source_sha256": "2c10f845d57901aa2e8c620172eb5eff12bc97f5ee19d93db5462dd6fb4e2e90"
     },
     {
       "path": "paper/objects/fig-main-matrix-max.tex",
       "origin": "rtns26_rtrealsense/body/40-appendix.tex",
       "label": "fig:main-matrix-max",
       "sha256": "79b45ff18b280e2721a43ff04441c4815cb4cc21e0432d2a0bc7f19ba7454614",
-      "source_sha256": "5b45751fd01fd3b479fbef13f572fafd3e20be621cd0eaa3e1cb98d788d4cbed"
+      "source_sha256": "2c10f845d57901aa2e8c620172eb5eff12bc97f5ee19d93db5462dd6fb4e2e90"
     },
     {
       "path": "paper/objects/tab-experiment-populations.tex",
@@ -200,18 +200,18 @@
       "path": "paper/objects/tab-steady-model-validation-full.tex",
       "origin": "rtns26_rtrealsense/body/40-appendix.tex",
       "label": "tab:steady-model-validation-full",
-      "source_sha256": "5b45751fd01fd3b479fbef13f572fafd3e20be621cd0eaa3e1cb98d788d4cbed",
+      "source_sha256": "2c10f845d57901aa2e8c620172eb5eff12bc97f5ee19d93db5462dd6fb4e2e90",
       "sha256": "753e5a94b749fde0dbad64ea06cecd194cdf24e164321d4a68970aeac4a5972f"
     },
     {
       "path": "code/reproduction/e1_workers/tables.py",
       "origin": "rs-camera/reproduction/e1_workers/tables.py",
-      "sha256": "21a395fe734318fdafb87c57a6d56f4b06e10d6614e0963f49b21385fa7f6a2b"
+      "sha256": "23a5a32276bab83d30881cb82e20bdd0ac7070a8c1a013b6ecf7e075935f3e9a"
     },
     {
       "path": "tests/test_e1_tables.py",
       "origin": "rs-camera/reproduction/tests/test_e1_tables.py",
-      "sha256": "a3d9994ccf4faa6b993be08ef805e3caa14608fef4c4a95840b4dee0bfbfa44e"
+      "sha256": "fafa3e20b70b0565a1250133015b20ce29b806836e81d4652b1961f8057bb6fb"
     }
   ]
 }

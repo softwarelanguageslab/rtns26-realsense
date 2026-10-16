@@ -1,7 +1,7 @@
 \begin{table*}[t]
   \centering
   \caption{Stress-workload data age and timestamp-to-return spans.  All values
-  are in milliseconds.  The p99 and Max columns are medians of the three
+  are in milliseconds.  The p99 and Max columns are means of the three
   per-run values.}
   \label{tab:instrumentation-age-overhead}
   \footnotesize
@@ -12,9 +12,9 @@
     Diagnostic mode & Sensor-age mean & Sensor-age p99 & Sensor-age Max &
       Backend-to-return p99 & Arrival-to-return p99 \\
     \midrule
-    Off        & 17.820 & 17.989 & 18.527 & 18.694 & 11.040 \\
-    Build-only & 17.770 & 18.073 & 18.716 & 18.671 & 11.023 \\
-    Full       & 17.809 & 17.942 & 18.138 & 18.714 & 11.042 \\
+    Off        & 17.840 & 18.074 & 18.558 & 18.711 & 11.077 \\
+    Build-only & 17.788 & 18.053 & 18.545 & 18.688 & 11.041 \\
+    Full       & 17.806 & 17.974 & 18.178 & 18.692 & 11.031 \\
     \bottomrule
   \end{tabular}
   }

@@ -66,6 +66,45 @@ class E1TableTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Expected 8 E1 rows'):
             tables.format_table('', [], [])
 
+    def compact_case(self):
+        names = list(tables.FAMILIES)
+        names[4] = r'Time-diff.\ keeper'
+        names[7] = 'Dispatchers'
+        template = ('Instances per camera $n$ (R/S): Depth/IR capture\n'
+                    '1/2, dispatchers 5/5, others 1.\n')
+        template += '\n'.join(
+            '    ' + name + r' & 45 & 45 & 100 & 100 & 0.00096 & 0.00096 \\'
+            for name in names)
+        data = []
+        for workload in tables.WORKLOADS:
+            for index in range(len(names)):
+                instances = 5 if index == 7 else (2 if index == 0 and workload == 'stress60' else 1)
+                family = 'Notification dispatcher' if index == 7 else tables.FAMILIES[index]
+                data.append(sample(index, workload=workload, family=family,
+                                   instances=instances, interval_min_ms=100))
+        return template, data
+
+    def test_compact_names_and_caption_instance_counts(self):
+        template, data = self.compact_case()
+        checks = []
+        result = tables.format_table(template, data, checks)
+        self.assertEqual(len(checks), 8)
+        self.assertTrue(all(check['matches_paper'] for check in checks))
+        self.assertIn(r'Time-diff.\ keeper', result)
+        self.assertEqual(checks[0]['paper'][-2:], ['1', '2'])
+        self.assertEqual(checks[7]['paper'][-2:], ['5', '5'])
+
+    def test_wrong_caption_instance_count_fails_comparison(self):
+        template, data = self.compact_case()
+        checks = []
+        tables.format_table(template.replace('1/2,', '1/3,'), data, checks)
+        self.assertFalse(checks[0]['matches_paper'])
+
+    def test_unrecognized_caption_count_format_fails(self):
+        template, data = self.compact_case()
+        with self.assertRaisesRegex(ValueError, 'instance counts in caption'):
+            tables.format_table(template.replace('dispatchers 5/5', 'dispatchers unknown'), data, [])
+
 
 if __name__ == '__main__':
     unittest.main()
