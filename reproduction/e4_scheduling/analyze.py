@@ -42,6 +42,8 @@ def analyze(repo, roots, out, artifacts, helper, archive, sections):
             raise ValueError('Expected 18 overhead runs in six cells')
         summary=[]
         for (workload,mode),group in sorted(grouped.items()):
-            summary.append({'workload':workload,'mode':mode,'runs':repetitions,
-                **{k:statistics.median(r[k] for r in group) for k in group[0] if k not in ['workload','mode','rep']}})
+            # Average each per-run statistic, including per-run means and maxima.
+            metrics={key:statistics.mean(row[key] for row in group)
+                     for key in group[0] if key not in ('workload','mode','rep')}
+            summary.append({'workload':workload,'mode':mode,'runs':repetitions,**metrics})
         write(out/'overhead_runs.csv',data);write(out/'overhead_summary.csv',summary)

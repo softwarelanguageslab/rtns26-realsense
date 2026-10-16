@@ -93,7 +93,9 @@ Under `OUTPUT/e4_scheduling/`:
 - `e4-p99.tex` / `.pdf`: bars are the mean of three per-run p99 values; dots
   retain individual runs; dashed lines indicate nominal frame periods.
 - `e4-max.tex` / `.pdf`: the maximum observed latency across the three runs.
-- With supplements: `overhead_runs.csv` and `overhead_summary.csv`.
+- With supplements: `overhead_runs.csv` and `overhead_summary.csv`. Every
+  overhead metric is the arithmetic mean of the corresponding statistic
+  across three runs, including per-run means, p99 values, and maxima.
 
 Red NF labels count deliveries with reuse or a sequence gap, once per delivery.
 The archive has 159 non-fresh deliveries across non-RT and one across RT;
