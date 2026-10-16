@@ -9,6 +9,7 @@ FAMILIES = (
     'Notification/pipeline dispatchers',
 )
 WORKLOADS = ('representative30', 'stress60')
+NAME_ALIASES = {r'Time-diff.\ keeper': 'Time-difference keeper'}
 
 
 def family_estimates(data, index, workload):
@@ -70,15 +71,28 @@ def matches_display(display, bounds, exact=False):
 
 def format_table(template, data, checks, full=False):
     """Rebuild every numeric cell and compare it with the captured manuscript."""
-    names = list(FAMILIES) + ['Dispatchers', r'\mbox{Thermal monitor']
+    names = list(FAMILIES) + list(NAME_ALIASES) + ['Dispatchers', r'\mbox{Thermal monitor']
     pattern = r'(?m)^    (?:' + '|'.join(map(re.escape, names)) + r').*?\\\\'
+    caption_counts = {}
+    if not full and 'Instances per camera' in template:
+        counts = re.search(
+            r'Instances per camera\s+\$n\$\s+\(R/S\):\s*Depth/IR capture\s+'
+            r'(\d+)/(\d+),\s*dispatchers\s+(\d+)/(\d+),\s*others\s+(\d+)\.',
+            template)
+        if counts is None:
+            raise ValueError('Unrecognized E1 instance counts in caption')
+        depth_r, depth_s, dispatch_r, dispatch_s, other = counts.groups()
+        caption_counts = {i: [other, other] for i in range(len(FAMILIES))}
+        caption_counts[0] = [depth_r, depth_s]
+        caption_counts[7] = [dispatch_r, dispatch_s]
     seen = set()
     index = 0
     def replace(match):
         nonlocal index
         cells = [re.sub(r'\s+', ' ', c.strip()) for c in match.group()[:-2].split('&')]
         name = cells[0]
-        family_index = next((i for i, family in enumerate(FAMILIES) if family in name), None)
+        canonical_name = NAME_ALIASES.get(name, name)
+        family_index = next((i for i, family in enumerate(FAMILIES) if family in canonical_name), None)
         if family_index is None and name.startswith('Dispatchers'):
             family_index = 7
         if family_index is None:
@@ -99,7 +113,8 @@ def format_table(template, data, checks, full=False):
             new = [pair[w][col] for col in (1, 2, 3) for w in (0, 1)]
             old = [re.sub(r'^\\rg\{(.*)\}$', r'\1', c) for c in cells[1:]]
             expected_counts = re.search(r'\(\$n\$=([^/]+)/([^\)]+)\)', name)
-            counts = list(expected_counts.groups()) if expected_counts else ['1', '1']
+            counts = (list(expected_counts.groups()) if expected_counts else
+                      caption_counts.get(family_index, ['1', '1']))
             # Include the implicit/annotated instance counts in each row check.
             old += counts
             new += [p[0] for p in pair]
